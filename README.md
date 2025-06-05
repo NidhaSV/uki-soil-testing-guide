@@ -14,7 +14,7 @@ The use case supports farmers in discovering soil testing services, placing orde
 
 | Role | Description |
 |------|-------------|
-| **BAP (Beckn App Provider)** | An application or platform through which farmers search for and request soil testing services. |
+| **BAP (Beckn Application Platform)** | An application or platform through which farmers search for and request soil testing services. |
 | **BPP (Beckn Provider Platform)** | A service provider (e.g., soil testing lab) that offers and fulfills soil testing services. |
 
 ---
@@ -23,20 +23,21 @@ The use case supports farmers in discovering soil testing services, placing orde
 
 | Entity             | Role in Network           | Beckn Component  |
 |--------------------|---------------------------|------------------|
-| Farmer             | Requests soil test         | BAP User         |
-| Soil Testing Lab   | Provides testing service   | BPP              |
-| Aggregator         | (Optional) Platform to manage multiple labs | BPP or middleware |
-| Extension Agent    | Interprets test results for farmers | External / Post-fulfillment |
+| Farmer             | Requests soil test         | BAP User        |
+| Agriculture App    | Helps to find soil test labs and place orders for test | BAP   |
+| Soil Testing Lab   | Provides testing service   | BPP User  |
+| Aggregator         | Platform where soil testing labs can register and receive orders | BPP |
+| Extension Agent    | (Optional)Guidance based on test results for farmers | BPP / Post-fulfillment |
 
 ---
 
 ## 🔄 4. High-Level DOFP Flow
 
 ### DOFP Stages:
-- **Discovery**: Farmer searches for nearby soil testing services.
+- **Discovery**: Farmer searches for nearby soil testing services in the Agriculture App.
 - **Order**: Farmer selects lab, test type, and confirms the request.
 - **Fulfillment**: Lab schedules pickup, tests sample, and uploads report.
-- **Post-Fulfillment**: Farmer receives the report and can give feedback.
+- **Post-Fulfillment**: Farmer receives the report and can give feedback. Farmer can also initiate order for further expert analysis of the report.
 
 ---
 
@@ -47,13 +48,13 @@ The use case supports farmers in discovering soil testing services, placing orde
 | `search`     | BAP          | Farmer searches for soil testing labs |
 | `on_search`  | BPP          | Lab(s) respond with available services |
 | `select`     | BAP          | Farmer selects a service |
-| `on_select`  | BPP          | Lab confirms availability |
+| `on_select`  | BPP          | Lab confirms availability for sample pickup |
 | `init`       | BAP          | Farmer initiates the order |
 | `on_init`    | BPP          | BPP acknowledges and returns order preview |
 | `confirm`    | BAP          | Farmer confirms order |
 | `on_confirm` | BPP          | Lab confirms and schedules collection |
 | `status`     | BAP          | Farmer checks order status |
-| `update`     | BPP          | Lab updates sample/testing/report status |
+| `update`     | BPP          | Lab updates sample pickup/testing/report status |
 | `rating`     | BAP          | Farmer rates the service |
 | `support`    | BAP          | Farmer raises issue/feedback |
 
@@ -89,9 +90,10 @@ The use case supports farmers in discovering soil testing services, placing orde
     }
   }
 }
+```
 
-##✅ on_search Response (Partial)
-
+### ✅ `on_search` Response (Partial)
+```json
 {
   "context": {
     "action": "on_search",
@@ -107,8 +109,8 @@ The use case supports farmers in discovering soil testing services, placing orde
           "descriptor": { "name": "GreenSoil Labs" },
           "items": [
             {
-              "id": "soil_test_basic",
-              "descriptor": { "name": "Basic Soil Test" },
+              "id": "soil_test_npk",
+              "descriptor": { "name": "NPK - Soil Test" },
               "price": { "currency": "INR", "value": "299" }
             }
           ]
@@ -117,39 +119,39 @@ The use case supports farmers in discovering soil testing services, placing orde
     }
   }
 }
+```
 
 
-
-##🏷️ 7. Taxonomy and Tagging Assumptions
+## 🏷️ 7. Taxonomy and Tagging Assumptions
 Item Name Tags: "Basic Soil Test", "Advanced NPK Analysis"
 Service Attributes: Turnaround time, pickup availability, report format
 Location Tags: GPS-based tagging for farms
 Report Format: PDF + structured JSON
 
-##⚠️ 8. Assumptions and Challenges
+## ⚠️ 8. Assumptions and Challenges
 Internet access may be limited in rural areas.
 Sample pickup logistics may require agent coordination.
 Reports must be multilingual (local language support).
 Testing services may have variable turnaround times.
 
-##🧑‍💻 9. Error Handling and Edge Cases
+## 🧑‍💻 9. Error Handling and Edge Cases
 No labs found (on_search empty): show fallback message.
 Lab unavailable after select: retry or suggest alternatives.
 Network failure: retry with exponential backoff.
 Test delayed: send proactive update using update call.
 
-##🔗 10. Developer Notes and References
+## 🔗 10. Developer Notes and References
 Beckn Protocol: https://becknprotocol.io
 Schema Reference: https://docs.google.com/document/d/1dAXXhoMpTKnluYe_LKUFBM66K0IfHRVTHMzH_ECKNDA/edit
 Use ISO 8601 for all timestamps.
 Secure all APIs with token-based authentication.
 
-##📚 11. Appendix
+## 📚 11. Appendix
 Glossary:
-BAP: Beckn App Provider
+BAP: Beckn Application Platform
 BPP: Beckn Provider Platform
 DOFP: Discovery, Order, Fulfillment, Post-Fulfillment
 
-Tools Used:
+## 🔧 12. Tools Used
 draw.io
 VS Code
