@@ -153,5 +153,5 @@ BPP: Beckn Provider Platform
 DOFP: Discovery, Order, Fulfillment, Post-Fulfillment
 
 ## 🔧 12. Tools Used
-draw.io
-VS Code
+- draw.io
+- VS Code
