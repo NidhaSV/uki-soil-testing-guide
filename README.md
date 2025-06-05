@@ -118,6 +118,8 @@ The use case supports farmers in discovering soil testing services, placing orde
   }
 }
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 🏷️ 7. Taxonomy and Tagging Assumptions
 Item Name Tags: "Basic Soil Test", "Advanced NPK Analysis"
 Service Attributes: Turnaround time, pickup availability, report format
