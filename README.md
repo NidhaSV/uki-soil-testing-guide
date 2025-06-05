@@ -90,7 +90,7 @@ The use case supports farmers in discovering soil testing services, placing orde
   }
 }
 
-✅ on_search Response (Partial)
+##✅ on_search Response (Partial)
 
 {
   "context": {
@@ -118,33 +118,33 @@ The use case supports farmers in discovering soil testing services, placing orde
   }
 }
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-🏷️ 7. Taxonomy and Tagging Assumptions
+
+##🏷️ 7. Taxonomy and Tagging Assumptions
 Item Name Tags: "Basic Soil Test", "Advanced NPK Analysis"
 Service Attributes: Turnaround time, pickup availability, report format
 Location Tags: GPS-based tagging for farms
 Report Format: PDF + structured JSON
 
-⚠️ 8. Assumptions and Challenges
+##⚠️ 8. Assumptions and Challenges
 Internet access may be limited in rural areas.
 Sample pickup logistics may require agent coordination.
 Reports must be multilingual (local language support).
 Testing services may have variable turnaround times.
 
-🧑‍💻 9. Error Handling and Edge Cases
+##🧑‍💻 9. Error Handling and Edge Cases
 No labs found (on_search empty): show fallback message.
 Lab unavailable after select: retry or suggest alternatives.
 Network failure: retry with exponential backoff.
 Test delayed: send proactive update using update call.
 
-🔗 10. Developer Notes and References
+##🔗 10. Developer Notes and References
 Beckn Protocol: https://becknprotocol.io
 Schema Reference: https://docs.google.com/document/d/1dAXXhoMpTKnluYe_LKUFBM66K0IfHRVTHMzH_ECKNDA/edit
 Use ISO 8601 for all timestamps.
 Secure all APIs with token-based authentication.
 
-📚 11. Appendix
+##📚 11. Appendix
 Glossary:
 BAP: Beckn App Provider
 BPP: Beckn Provider Platform
