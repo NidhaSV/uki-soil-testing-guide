@@ -38,21 +38,6 @@ The use case supports farmers in discovering soil testing services, placing orde
 - **Fulfillment**: Lab schedules pickup, tests sample, and uploads report.
 - **Post-Fulfillment**: Farmer receives the report and can give feedback.
 
-Farmer (BAP App)
-↓
-Search → on_search
-↓
-Select → on_select
-↓
-Init → on_init
-↓
-Confirm → on_confirm
-↓
-Fulfillment → status → update
-↓
-Report & Feedback (Post-Fulfillment)
-
-
 ---
 
 ## 🧪 5. API Call Sequence and Descriptions
